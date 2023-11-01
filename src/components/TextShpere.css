@@ -1,0 +1,25 @@
+/* Importing google font  */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600;700;800;900&display=swap');
+
+.text-shpere {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    overflow: hidden;
+}
+
+.tagcloud {
+    top: 300px;
+    left: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.0625em;
+    font-size: 1.3em;
+}
+
+.tagcloud--item {
+    color: rgba(145, 94, 255, 0.2);
+    text-transform: uppercase;
+}
