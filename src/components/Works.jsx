@@ -54,10 +54,10 @@ const ProjectCard = ({
         <div className='mt-4 flex flex-wrap gap-2'>
           {tags.map((tag, place) => (
             <p
-              key={`${name}-${tag.name}`}
+              key={`${name}-${tag.stringValua}`}
               className={`text-[14px] ${ place % 3 == 0 ? 'blue-text-gradient' : place % 3 == 1 ? 'green-text-gradient' : 'pink-text-gradient'}`}
             >
-              #{tag.name}
+              #{tag.stringValua}
             </p>
           ))}
         </div>
