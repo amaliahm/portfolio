@@ -4,9 +4,10 @@ import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { github, figma } from '../assets';
 import { SectionWrapper } from '../hoc';
-import { fadeIn, textVariant } from '../utils/motion';
+import { fadeIn } from '../utils/motion';
 import { projects } from '../constants';
 import CanvasLoader from './Loader'
+import './work.js'
 
 const ProjectCard = ({
   index,
@@ -19,13 +20,8 @@ const ProjectCard = ({
   return (
 
     <motion.div variants={fadeIn('up', "spring" , index * 0.5, 0.75)} className='hover:cursor-pointer'>
-      <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full'
+      <div
+        className='bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full card'
       >
         <div className='relative w-full h-[230px]'>
         <img
@@ -60,7 +56,7 @@ const ProjectCard = ({
             </p>
           ))}
         </div>
-      </Tilt>
+      </div>
     </motion.div>
   )
 }
@@ -74,7 +70,7 @@ const Works = () => {
       </motion.div>
       <Suspense fallback={<CanvasLoader />}>
       </Suspense>
-      <div className='mt-20 flex-wrap flex gap-7 h-auto'>
+      <div className='cards'>
         {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project}/>
         ))}

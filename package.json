@@ -26,6 +26,7 @@
     "react-router-dom": "^6.17.0",
     "react-tilt": "^1.0.2",
     "react-vertical-timeline-component": "^3.6.0",
+    "swiper": "^11.0.3",
     "TagCloud": "^2.4.0",
     "three": "^0.158.0"
   },
