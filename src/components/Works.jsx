@@ -1,13 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, {Suspense} from 'react';
 import { Tilt } from 'react-tilt';
 import { motion } from 'framer-motion';
 import { styles } from '../styles';
 import { github, figma } from '../assets';
 import { SectionWrapper } from '../hoc';
-import { projects } from '../constants';
 import { fadeIn, textVariant } from '../utils/motion';
-import { findWorks, findWorkImage} from '../firebase.mjs';
-import { idText } from 'typescript';
+import { projects } from '../constants';
+import CanvasLoader from './Loader'
 
 const ProjectCard = ({
   index,
@@ -54,10 +53,10 @@ const ProjectCard = ({
         <div className='mt-4 flex flex-wrap gap-2'>
           {tags.map((tag, place) => (
             <p
-              key={`${name}-${tag.stringValue}`}
+              key={`${name}-${tag}`}
               className={`text-[14px] ${ place % 3 == 0 ? 'blue-text-gradient' : place % 3 == 1 ? 'green-text-gradient' : 'pink-text-gradient'}`}
             >
-              #{tag.stringValue}
+              #{tag}
             </p>
           ))}
         </div>
@@ -67,50 +66,16 @@ const ProjectCard = ({
 }
 
 const Works = () => {
-
-
-  const [loading, setLoading] = useState(false)
-  const [work, setWork] = useState([])
-  const [image, setImage] = useState([])
-  const fetchData = async () => {
-    setLoading(true)
-    const works = await findWorks()
-    setWork([...works])
-    const images = await findWorkImage()
-    setImage([...images])
-    setLoading(false)
-  }
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  let name = ''
-  image.forEach(element => {
-    (element.split('/')[7].split('.')[0].split('%')).map((e, index) => {
-      if (index != 0) {
-        name = name.concat(e.slice(2,100)).concat(' ')
-      }
-    })
-    name = name.slice(0, name.length - 1)
-    work.map((e) => {
-      if (name == e.name ) {
-        e.image = element
-      }
-    })
-    name = ''
-  });
-
-
   return (
     <>
-      <motion.div variants={textVariant()} >
-        <p className={`${styles.sectionSubText} text-center mt-20`}>What i did recently</p>
+      <motion.div >
+        <p className={`${styles.sectionSubText} text-center`}>What i did recently</p>
         <h2 className={`${styles.sectionHeadText} text-center`}>Projects</h2>
       </motion.div>
-      <div className='w-full flex'>
-      </div>
-      <div className='mt-20 flex flex-wrap gap-7 h-auto'>
-        {work.map((project, index) => (
+      <Suspense fallback={<CanvasLoader />}>
+      </Suspense>
+      <div className='mt-20 flex-wrap flex gap-7 h-auto'>
+        {projects.map((project, index) => (
           <ProjectCard key={`project-${index}`} index={index} {...project}/>
         ))}
       </div>

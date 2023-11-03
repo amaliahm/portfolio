@@ -46,16 +46,6 @@ const getstorage = () => {
     return storage
 }
 
-//get technologies images
-
-const findTechImages = async () => {
-    const storageRef = ref(getstorage(), "technologies/")
-    const result = await listAll(storageRef)
-    const url = result.items.map((img) => getDownloadURL(img))
-
-    return Promise.all(url)
-}
-
 //get about 
 
 const findAbout  = async () => {
@@ -75,35 +65,6 @@ const findOverview = async () => {
     const res = []
     docs_ref.forEach(e => {
         res.push(e._document.data.value.mapValue.fields.introduction.stringValue)
-    })
-    return res
-}
-
-//find work image
-
-const findWorkImage = async () => {
-    const storageRef = ref(getstorage(), "works/")
-    const result = await listAll(storageRef)
-    const url = result.items.map((img) => getDownloadURL(img))
-    return Promise.all(url)
-}
-
-
-//find work or projects
-
-const findWorks = async () => {
-    const docs_ref = await getDocs(collection(getDatabase(), "works"))
-    const res = []
-    docs_ref.forEach(e => {
-        const value = e._document.data.value.mapValue.fields
-        res.push({
-            index: value.index.integerValue,
-            name: value.name.stringValue,
-            description: value.description.stringValue,
-            tags: value.tags.arrayValue.values,
-            image: '/',
-            source_code_link: value.source.stringValue
-        })
     })
     return res
 }
@@ -138,4 +99,4 @@ const findFeedbacks = async () => {
 }
 
 
-export {findAbout, findOverview, findTechImages, findWorks, findWorkImage, findExperiences, findFeedbacks}
+export {findAbout, findOverview, findExperiences, findFeedbacks}
