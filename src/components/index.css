@@ -31,6 +31,7 @@
     column-gap: 16px;
     padding: 50px;
     overflow-x: scroll;
+    background-color: rgb(5 8 22 / var(--tw-bg-opacity));
 }
 ::-webkit-scrollbar {
     width: 2px;
@@ -51,6 +52,7 @@
     flex-direction: column;
     padding: 32px;
     height: 500px;
+    min-width: 400px;
     box-shadow: -16px 0 32px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     transition: transform 250ms;
